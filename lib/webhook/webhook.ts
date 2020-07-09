@@ -1,5 +1,6 @@
 import {
 	CallEvent,
+	Direction,
 	GatherObject,
 	GatherOptions,
 	HangUpObject,
@@ -103,11 +104,21 @@ const createWebhookServer = async (
 };
 
 const parseRequestBody = (body: string): CallEvent => {
-	body = body
-		.replace('user%5B%5D', 'users%5B%5D')
-		.replace('userId%5B%5D', 'userIds%5B%5D')
-		.replace('fullUserId%5B%5D', 'fullUserIds%5B%5D');
-
+	const parsedBody = parse(body);
+	if ((parsedBody.event as EventType) === EventType.NEW_CALL) {
+		return {
+			event: EventType.NEW_CALL,
+			originalCallId: parsedBody.originalCallId as string,
+			users: parsedBody.user as string[],
+			userIds: parsedBody.userId as string[],
+			fullUserIds: parsedBody.fullUserId as string[],
+			direction: parsedBody.direction as Direction,
+			from: parsedBody.from as string,
+			to: parsedBody.to as string,
+			xcid: parsedBody.xcid as string,
+			callId: parsedBody.callerId as string,
+		};
+	}
 	return parse(body) as CallEvent;
 };
 

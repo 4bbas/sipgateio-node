@@ -1,6 +1,6 @@
 import { EventType, RejectReason } from '../webhook.module';
 
-enum Direction {
+export enum Direction {
 	IN = 'in',
 	OUT = 'out',
 }
