@@ -29,7 +29,7 @@ export interface WebhookServer {
 }
 
 export interface ServerOptions {
-	port: number;
+	port: number | string;
 	serverAddress: string;
 	hostname?: string;
 }
