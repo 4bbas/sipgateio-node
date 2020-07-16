@@ -555,7 +555,7 @@ interface ContactsModule {
 	exportAsCsv: (scope: ExportScope, delimiter?: string) => Promise<string>;
 	exportAsVCards: (scope: ExportScope) => Promise<string[]>;
 	exportAsSingleVCard: (scope: ExportScope) => Promise<string>;
-	exportAsObjects: (scope: ExportScope) => Promise<ContactRequest[]>;
+	exportAsObjects: (scope: ExportScope) => Promise<ContactResponse[]>;
 }
 ```
 
@@ -617,7 +617,7 @@ It returns a list of contacts for the given scope as described in the following 
 **Note:** using a filter will ignore pagination
 
 ```typescript
-interface ContactRequest {
+interface ContactResponse {
 	id: string;
 	name: string;
 	picture: string;
